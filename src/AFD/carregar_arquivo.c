@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "header.h"
+#include "../header.h"
 #include "carregar_arquivo.h"
 
 // Funcao para manipular string

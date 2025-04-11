@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "header.h"
-#include "carregar_arquivo.h"
-#include "verificar_palavra.h"
+#include "AFD/carregar_arquivo.h"
+#include "AFD/verificar_palavra.h"
 
 // Funcao para inserir elemento na lista
 static Elem* inserir_elemento(Elem* l, Transicoes x);
