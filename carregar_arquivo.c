@@ -65,34 +65,38 @@ void carregar_arquivo(Automato* automato)
 void imprimir_gramatica(Automato automato)
 {
     Elem* aux;
-    char comb = 'z';
+    int estado_atual = -1;
+    int producao = 1;
     register int i;
+    int flag;
 
-    for(aux = *automato.transicoes; aux != NULL;){
-
-        if(comb != aux->info.estado_atual){
-            if(comb != 'z')
+    for(aux = *automato.transicoes; aux != NULL; aux = aux->prox){
+        if(estado_atual != aux->info.estado_atual){
+            if(!producao)
                 printf("\n");
 
-            comb = aux->info.estado_atual;
-            printf("%c -> ", comb + 65);
+            estado_atual = aux->info.estado_atual;
+            printf("%c -> ", estado_atual + 'A');
+            producao = 1;
+        }
+        else if(!producao){
+            printf(" | ");
         }
 
-        printf("%c", aux->info.simbolo_lido);
-        printf("%c", aux->info.proximo_estado + 65);
+        printf("%c%c", aux->info.simbolo_lido, aux->info.proximo_estado + 'A');
+        producao = 0;
 
-        for(i = 0; automato.estados_finais[i]; i++){
-            if(automato.estados_finais[i] == aux->info.estado_atual){
-                printf(" | @");
+        flag = 0;
+        for(i = 0; automato.estados_finais[i] != -1; i++){
+            if(automato.estados_finais[i] == estado_atual){
+                flag = 1;
+                break;
             }
         }
-
-        aux = aux->prox;
-
-        if(aux != NULL && comb == aux->info.estado_atual)
-            printf(" | ");
+        if(flag && (aux->prox == NULL || aux->prox->info.estado_atual != estado_atual)){
+            printf(" | @");
+        }
     }
-
     printf("\n");
 }
 
