@@ -137,4 +137,6 @@ void menu()
             printf("Opcao invalida, tente novamente!!\n");
         }
     }while(op != 0);
+
+    liberar_automato(automato);
 }

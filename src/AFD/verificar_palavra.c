@@ -20,11 +20,6 @@ static char* inserir_entrada();
 // Pos-condicao: retorna -1 caso nao seja valida
 static int verificar_transicao(int estado_atual, char caractere, Automato automato);
 
-// Funcao para liberar tudo que foi alocado no automato
-// Pre-condicao: automato criado
-// Pos-condicao: libera as especificacoes de dentro da estrutura
-static void liberar_automato(Automato automato);
-
 // Funcao para verificar palavra
 // Pre-condicao: arquivo carregado
 // Pos-condicao: nenhuma
@@ -68,7 +63,6 @@ void verificar_palavra(Automato automato)
         printf("REJEITA\n");
 
     free(palavra);
-    liberar_automato(automato);
 }
 
 // Funcao para inserir entrada do usuario
@@ -118,7 +112,7 @@ static int verificar_transicao(int estado_atual, char caractere, Automato automa
 // Funcao para liberar tudo que foi alocado no automato
 // Pre-condicao: automato criado
 // Pos-condicao: libera as especificacoes de dentro da estrutura
-static void liberar_automato(Automato automato)
+void liberar_automato(Automato automato)
 {
     automato.transicoes = liberar_lista(automato.transicoes);
     free(automato.alfabeto);
